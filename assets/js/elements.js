@@ -1,6 +1,4 @@
 var elements = [
-	{ //There isn't a 0th element
-	},
 	{
 		"id": 1,
 		"cn": "氢",

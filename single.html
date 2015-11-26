@@ -3,27 +3,27 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Chemele</title>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <!-- Bootstrap -->
-    <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
-    <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<title>Chemele</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+	
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
+	<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-    <link rel="stylesheet" type="text/css" href="assets/style.css">
-    
-    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
-    
-    <script type="text/javascript" src="assets/js/elements.js"></script>
-    <script type="text/javascript" src="assets/js/script.js"></script>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+	<link rel="stylesheet" type="text/css" href="assets/style.css">
+	
+	<script type="text/javascript" src="assets/js/elements.js"></script>
+	<script type="text/javascript" src="assets/js/script.js"></script>
 </head>
 <body>
 
@@ -61,29 +61,35 @@
 		<div class="col-md-3">
 			<div class="bs-sidebar hidden-print visible-lg visible-md" role="complementary" >
 				<ul class="nav bs-sidenav">
-					  <li class="active"><a href="#">单人竞速</a></li>
-					  <li><a href="#">双人抢答</a></li>
-					  <li><a href="#">双人时限</a></li>
+						<li class="active"><a href="#">单人竞速</a></li>
+						<li><a href="#">双人抢答</a></li>
+						<li><a href="#">双人时限</a></li>
 				</ul>
 			</div>
 		</div>
 
 		<div class="col-md-9" role="main">
 			<div class="progress">
-				<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+				<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
 					<span class="sr-only">60% Complete</span>
 				</div>
-				<div class="progress-bar progress-bar-danger" style="width: 10%">
+				<div class="progress-bar progress-bar-danger progress-bar-striped" style="width: 10%">
 					<span class="sr-only">10% Fail</span>
 				</div>
 			</div>
 			
 			<div class="panel panel-default">
-				<div class="panel-body" id="aboutInfo">
+				<div class="panel-body text-center" id="aboutInfo">
 					<h3 class="control-title">单人竞速模式</h3>
-					<!--<p>规则说明：</p>
-					<p>基本难度是1-20号元素打乱顺序后</p>-->
-					<a class="btn btn-info" href="#">开始游戏</a>
+					<h4>难度说明：</h4>
+					<p>简单：1-20号元素</p>
+					<p>一般：1-36号元素</p>
+					<p>困难：所有主族元素</p>
+					<p>吊打：整张元素周期表</p>
+					<a class="btn btn-info" id="mode1" href="#">简单</a>
+					<a class="btn btn-info" id="mode2" href="#">一般</a>
+					<a class="btn btn-info" id="mode3" href="#">困难</a>
+					<a class="btn btn-info" id="mode4" href="#">吊打</a>
 				</div>
 			</div>
 
