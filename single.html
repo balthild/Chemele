@@ -23,6 +23,7 @@
 	<link rel="stylesheet" type="text/css" href="assets/style.css">
 	
 	<script type="text/javascript" src="assets/js/elements.js"></script>
+	<script type="text/javascript" src="assets/js/questions.js"></script>
 	<script type="text/javascript" src="assets/js/script.js"></script>
 </head>
 <body>
@@ -36,23 +37,22 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Chemele</a>
+			<a class="navbar-brand" href="index.html">Chemele</a>
 		</div>
+
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">单人时限</a></li>
-				<li><a href="#about">双人抢答</a></li>
-				<li><a href="#contact">双人时限</a></li>
+				<li class="active"><a href="javascript:void();">单人竞速</a></li>
+				<li><a href="race.html">双人竞速</a></li>
+				<li><a href="preempt.html">双人抢答</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#navbar/">返回首页</a></li>
-				<li><a href="#navbar-fixed-top/">..</a></li>
+				<li><a href="index.html">返回首页</a></li>
+				<li><a href="about.html">关于</a></li>
 			</ul>
 		</div><!--/.nav-collapse -->
-	<iframe id="tmp_downloadhelper_iframe" style="display: none;"></iframe></div>
+	</div>
 </nav>
-
-
 
 <div class="container">
 	
@@ -61,35 +61,33 @@
 		<div class="col-md-3">
 			<div class="bs-sidebar hidden-print visible-lg visible-md" role="complementary" >
 				<ul class="nav bs-sidenav">
-						<li class="active"><a href="#">单人竞速</a></li>
-						<li><a href="#">双人抢答</a></li>
-						<li><a href="#">双人时限</a></li>
+						<li class="active"><a href="javascript:void();">单人竞速</a></li>
+						<li><a href="race.html">双人竞速</a></li>
+						<li><a href="preempt.html">双人抢答</a></li>
 				</ul>
 			</div>
 		</div>
 
 		<div class="col-md-9" role="main">
-			<div class="progress">
-				<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-					<span class="sr-only">60% Complete</span>
+			<div class="progress hidden">
+				<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
 				</div>
-				<div class="progress-bar progress-bar-danger progress-bar-striped" style="width: 10%">
-					<span class="sr-only">10% Fail</span>
+				<div class="progress-bar progress-bar-danger progress-bar-striped" style="width: 0%">
 				</div>
 			</div>
 			
 			<div class="panel panel-default">
-				<div class="panel-body text-center" id="aboutInfo">
-					<h3 class="control-title">单人竞速模式</h3>
+				<div class="panel-body text-center" id="gamearea">
+					<h3 class="control-title">单人竞速</h3>
 					<h4>难度说明：</h4>
 					<p>简单：1-20号元素</p>
 					<p>一般：1-36号元素</p>
 					<p>困难：所有主族元素</p>
 					<p>吊打：整张元素周期表</p>
-					<a class="btn btn-info" id="mode1" href="#">简单</a>
+					<a class="btn btn-success" id="mode1" href="#">简单</a>
 					<a class="btn btn-info" id="mode2" href="#">一般</a>
-					<a class="btn btn-info" id="mode3" href="#">困难</a>
-					<a class="btn btn-info" id="mode4" href="#">吊打</a>
+					<a class="btn btn-warning" id="mode3" href="#">困难</a>
+					<a class="btn btn-danger" id="mode4" href="#">吊打</a>
 				</div>
 			</div>
 
