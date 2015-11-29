@@ -32,7 +32,7 @@ var elem = {
 		// 这是网上抄来的打乱数组的代码，原理我也不知道 quq
 		var arr1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 		var arr2 = [];
-		while(arr1.length > 0){
+		while (arr1.length > 0) {
 			var elem = arr1.splice(Math.random() * arr1.length << 0, 1);
 			arr2.push(elem);
 		}
@@ -97,42 +97,75 @@ var elem = {
 				default:
 					// code
 			}
-			$('#game-area').append('<br>' + questions[i][0] + '<br>' + questions[i][1] + '<br>')
+			// $('#game-area').append('<br>' + questions[i][0] + '<br>' + questions[i][1] + '<br>');
 		}
 		return questions;
 	}
 };
 
-var score = [0, 0];
-
+var score, q, count;
 var game = {
 	start: function(mode) {
-		var questions = elem.genQuestion(mode);
+		score = [0, 0];
+		q = elem.genQuestion(mode);
+		count = 0;
 		$('#score-bar').slideDown();
+		
+		// 给选项委托点击事件
+		$('#correct-option').on('click', function() {
+			game.correct();
+		});
+		$('.incorrect-options').on('click', function() {
+			game.incorrect();
+		});
+		
+		// generate question content
+		
+		game.next();
+	},
+	next: function() {
+		timer.reset();
+		if (count < 20) {
+			// hide question {count - 1}
+			// dislay question {count}
+			count++;
+		} else {
+			game.end();
+		}
+	},
+	end: function() {
+		$('#correct-option').off('click');
+		$('.incorrect-options').off('click');
 	},
 	
 	correct: function() {
 		$('#correct-bar').animate({width: (++score[0] * 5) + '%'}, 30);
+		timer.breakOff(true);
+		game.next();
 	},
 	incorrect: function() {
 		$('#incorrect-bar').animate({width: (++score[1] * 5) + '%'}, 30);
-	},
-	
-	genBinArray: function() {
-		var binArray = new Array();
-		for (var i = 0; i < 21; i++) {
-			binArray[i] = [0, 1, 2, 3, 4, 5, 6, 7];
-		};
+		timer.breakOff(false);
+		game.next();
 	}
 };
 
+var timerHandler;
 var timer = {
 	start: function(timeout) {
-		
+		timerHandler = setTimeout("game.incorrect();", 5000);
+		$('#timebar').animate({width: 0}, 5000);
+	},
+	reset: function() {
+		$('#timebar').stop().css(width, '100%');
 	},
 	
-	reset: function() {
-		
+	breakOff: function(correct) {
+		clearTimeout(timerHandler);
+		if (correct)
+			game.correct();
+		else
+			game.incorrect();
 	}
 };
 
