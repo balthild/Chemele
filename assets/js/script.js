@@ -120,18 +120,17 @@ var game = {
 		});
 		
 		// generate question content
+		$('#timer-bar').show();
 		
 		game.next();
 	},
 	next: function() {
-		timer.reset();
 		if (count < 20) {
 			// hide question {count - 1}
 			// dislay question {count}
 			timer.start();
 			
 			count++;
-			//alert(count)
 		} else {
 			game.end();
 		}
@@ -142,17 +141,17 @@ var game = {
 	},
 	
 	correct: function() {
-		$('#correct-bar').animate({width: (++score[0] * 5) + '%'}, 30);
+		$('#correct-bar').animate({width: (++score[0] * 5) + '%'}, 500);
 		timer.break(true);
 		game.next();
 	},
 	incorrect: function() {
-		$('#incorrect-bar').animate({width: (++score[1] * 5) + '%'}, 30);
+		$('#incorrect-bar').animate({width: (++score[1] * 5) + '%'}, 500);
 		timer.break(false);
 		game.next();
 	},
 	timeout: function() {
-		$('#timeout-bar').animate({width: (++score[2] * 5) + '%'}, 30);
+		$('#timeout-bar').animate({width: (++score[2] * 5) + '%'}, 500);
 		game.next();
 	}
 };
@@ -160,14 +159,15 @@ var game = {
 var timerHandler;
 var timer = {
 	start: function(timeout) {
-		timerHandler = setTimeout("game.timeout();", 1000);
-		$('#timebar').animate({width: 0}, 1000);
-	},
-	reset: function() {
-		$('#timebar').stop().css('width', '100%');
+		$('#time-bar').css('width', '100%');
+		timerHandler = setTimeout("game.timeout();", 3000);
+		$('#time-bar').animate({width: '0%'}, 3000, 'linear', function() {
+			$('#time-bar').css('width', '100%');
+		});
 	},
 	break: function(correct) {
 		clearTimeout(timerHandler);
+		$('#time-bar').stop().css('width', '100%');
 	}
 };
 

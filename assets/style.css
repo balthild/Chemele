@@ -24,3 +24,10 @@ body {
 .control-title {
     margin-top: 0;
 }
+
+#score-bar .progress-bar, #timer-bar .progress-bar {
+	-webkit-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+#timer-bar { margin-bottom: 0; }
