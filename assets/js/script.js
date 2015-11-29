@@ -37,11 +37,9 @@ var elem = {
 			arr2.push(elem);
 		}
 		return arr2;
-	}
-};
-
-var game = {
-	start: function(mode) {
+	},
+	
+	genQuestion: function(mode) {
 		// 随机取出打乱的20个元素
 		var qElem = elem.pick(mode);
 		var questions = new Array(20);
@@ -87,12 +85,12 @@ var game = {
 				case 5:
 					// 生成随机位置id，见pos
 					var posId = Math.floor(Math.random() * 4);
-					while (false) {
-						//
+					while (qElem[i]["rel"][posId] == 0) {
+						posId = Math.floor(Math.random() * 4);
 					}
 					questions[i] = [
 						templates[5][0].replace("{{sym}}", qElem[i]["sym"]).replace("{{pos}}", pos[posId]),
-						elements[qElem["rel"][posId] - 1]["cn"]
+						elements[qElem[i]["rel"][posId] - 1]["cn"]
 					];
 					break;
 				
@@ -102,6 +100,13 @@ var game = {
 			$('#gamearea').append('<br>' + questions[i][0] + '<br>' + questions[i][1] + '<br>')
 		}
 		alert(JSON.stringify(qElem))
+		return questions;
+	}
+};
+
+var game = {
+	start: function(mode) {
+		var questions = elem.genQuestion(mode);
 	},
 	
 	correct: function() {
