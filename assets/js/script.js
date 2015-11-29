@@ -106,7 +106,7 @@ var elem = {
 var score, q, count;
 var game = {
 	start: function(mode) {
-		score = [0, 0];
+		score = [0, 0, 0];
 		q = elem.genQuestion(mode);
 		count = 0;
 		$('#score-bar').slideDown();
@@ -128,7 +128,10 @@ var game = {
 		if (count < 20) {
 			// hide question {count - 1}
 			// dislay question {count}
+			timer.start();
+			
 			count++;
+			//alert(count)
 		} else {
 			game.end();
 		}
@@ -140,12 +143,16 @@ var game = {
 	
 	correct: function() {
 		$('#correct-bar').animate({width: (++score[0] * 5) + '%'}, 30);
-		timer.breakOff(true);
+		timer.break(true);
 		game.next();
 	},
 	incorrect: function() {
 		$('#incorrect-bar').animate({width: (++score[1] * 5) + '%'}, 30);
-		timer.breakOff(false);
+		timer.break(false);
+		game.next();
+	},
+	timeout: function() {
+		$('#timeout-bar').animate({width: (++score[2] * 5) + '%'}, 30);
 		game.next();
 	}
 };
@@ -153,24 +160,19 @@ var game = {
 var timerHandler;
 var timer = {
 	start: function(timeout) {
-		timerHandler = setTimeout("game.incorrect();", 5000);
-		$('#timebar').animate({width: 0}, 5000);
+		timerHandler = setTimeout("game.timeout();", 1000);
+		$('#timebar').animate({width: 0}, 1000);
 	},
 	reset: function() {
-		$('#timebar').stop().css(width, '100%');
+		$('#timebar').stop().css('width', '100%');
 	},
-	
-	breakOff: function(correct) {
+	break: function(correct) {
 		clearTimeout(timerHandler);
-		if (correct)
-			game.correct();
-		else
-			game.incorrect();
 	}
 };
 
 jQuery(document).ready(function($) {
 	$('#mode1').click(function() {
-		game.start(1);
+		game.start(0);
 	})
 });
