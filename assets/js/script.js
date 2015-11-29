@@ -97,23 +97,25 @@ var elem = {
 				default:
 					// code
 			}
-			$('#gamearea').append('<br>' + questions[i][0] + '<br>' + questions[i][1] + '<br>')
+			$('#game-area').append('<br>' + questions[i][0] + '<br>' + questions[i][1] + '<br>')
 		}
-		alert(JSON.stringify(qElem))
 		return questions;
 	}
 };
 
+var score = [0, 0];
+
 var game = {
 	start: function(mode) {
 		var questions = elem.genQuestion(mode);
+		$('#score-bar').slideDown();
 	},
 	
 	correct: function() {
-		//
+		$('#correct-bar').animate({width: (++score[0] * 5) + '%'}, 30);
 	},
 	incorrect: function() {
-		//
+		$('#incorrect-bar').animate({width: (++score[1] * 5) + '%'}, 30);
 	},
 	
 	genBinArray: function() {
@@ -123,8 +125,6 @@ var game = {
 		};
 	}
 };
-
-var score = [0, 0];
 
 var timer = {
 	start: function(timeout) {

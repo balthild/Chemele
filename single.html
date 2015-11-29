@@ -69,25 +69,23 @@
 		</div>
 
 		<div class="col-md-9" role="main">
-			<div class="progress hidden">
-				<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-				</div>
-				<div class="progress-bar progress-bar-danger progress-bar-striped" style="width: 0%">
-				</div>
+			<div class="progress" id="score-bar" style="display:none">
+				<div class="progress-bar progress-bar-striped" id="correct-bar" style="width: 0%;"></div>
+				<div class="progress-bar progress-bar-danger" id="incorrect-bar" style="width: 0%"></div>
 			</div>
 			
 			<div class="panel panel-default">
-				<div class="panel-body text-center" id="gamearea">
+				<div class="panel-body text-center" id="game-area">
 					<h3 class="control-title">单人竞速</h3>
 					<h4>难度说明：</h4>
 					<p>简单：1-20号元素</p>
 					<p>一般：1-36号元素</p>
 					<p>困难：所有主族元素</p>
 					<p>吊打：整张元素周期表</p>
-					<a class="btn btn-success" id="mode1" href="#">简单</a>
-					<a class="btn btn-info" id="mode2" href="#">一般</a>
-					<a class="btn btn-warning" id="mode3" href="#">困难</a>
-					<a class="btn btn-danger" id="mode4" href="#">吊打</a>
+					<a class="btn btn-success" id="mode1" href="javascript:void(0)">简单</a>
+					<a class="btn btn-info" id="mode2" href="javascript:void(0)">一般</a>
+					<a class="btn btn-warning" id="mode3" href="#javascript:void(0)">困难</a>
+					<a class="btn btn-danger" id="mode4" href="javascript:void(0)">吊打</a>
 				</div>
 			</div>
 
