@@ -47,42 +47,74 @@ var elem = {
 			// 随机生成题目类型序号0-5，见templates
 			var rand = Math.floor(Math.random() * 6);
 			switch (rand) {
+				/*
+				case 类型序号:
+					questions[i] = [
+						问题,
+						正确选项,
+						干扰选项1,
+						干扰选项2,
+						干扰选项3
+					];
+					break;
+				*/
 				case 0:
+					var r = elem.genIncorrectElementId(i);
 					questions[i] = [
 						templates[0][0].replace("{{id}}", qElem[i]["id"]),
-						qElem[i]["cn"]
+						qElem[i]["cn"],
+						qElem[r[0]]["cn"],
+						qElem[r[1]]["cn"],
+						qElem[r[2]]["cn"]
 					];
 					break;
 				
 				case 1:
+					var r = elem.genIncorrectElementId(i);
 					questions[i] = [
 						templates[1][0].replace("{{sym}}", qElem[i]["sym"]),
-						qElem[i]["cn"]
+						qElem[i]["cn"],
+						qElem[r[0]]["cn"],
+						qElem[r[1]]["cn"],
+						qElem[r[2]]["cn"]
 					];
 					break;
 				
 				case 2:
+					var r = elem.genIncorrectElementId(i);
 					questions[i] = [
 						templates[2][0].replace("{{group}}", groups[qElem[i]["gid"]]).replace("{{pr}}", qElem[i]["pr"]),
-						qElem[i]["cn"]
+						qElem[i]["cn"],
+						qElem[r[0]]["cn"],
+						qElem[r[1]]["cn"],
+						qElem[r[2]]["cn"]
 					];
 					break;
 				
 				case 3:
+					var r = elem.genIncorrectElementId(i);
 					questions[i] = [
 						templates[3][0].replace("{{sym}}", qElem[i]["sym"]),
-						groups[qElem[i]["gid"]] + "族" + qElem[i]["pr"] + "周期"
+						groups[qElem[i]["gid"]] + "族" + qElem[i]["pr"] + "周期",
+						groups[qElem[r[0]]["gid"]] + "族" + qElem[r[2]]["pr"] + "周期",
+						groups[qElem[r[1]]["gid"]] + "族" + qElem[r[1]]["pr"] + "周期",
+						groups[qElem[r[2]]["gid"]] + "族" + qElem[r[0]]["pr"] + "周期"
 					];
 					break;
 				
 				case 4:
+					var r = elem.genIncorrectElementId(i);
 					questions[i] = [
 						templates[4][0].replace("{{cn}}", qElem[i]["cn"]),
-						qElem[i]["ram"]
+						qElem[i]["ram"],
+						qElem[r[0]]["ram"],
+						qElem[r[1]]["ram"],
+						qElem[r[2]]["ram"]
 					];
 					break;
 				
 				case 5:
+					var r = elem.genIncorrectElementId(i);
 					// 生成随机位置id，见pos
 					var posId = Math.floor(Math.random() * 4);
 					while (qElem[i]["rel"][posId] == 0) {
@@ -90,16 +122,35 @@ var elem = {
 					}
 					questions[i] = [
 						templates[5][0].replace("{{sym}}", qElem[i]["sym"]).replace("{{pos}}", pos[posId]),
-						elements[qElem[i]["rel"][posId] - 1]["cn"]
+						elements[qElem[i]["rel"][posId] - 1]["cn"],
+						qElem[r[0]]["cn"],
+						qElem[r[1]]["cn"],
+						qElem[r[2]]["cn"]
 					];
 					break;
 				
 				default:
-					// code
+					// nothing to do
 			}
 			// $('#game-area').append('<br>' + questions[i][0] + '<br>' + questions[i][1] + '<br>');
 		}
 		return questions;
+	},
+	genIncorrectElementId: function(correctId) {
+		var r = new Array(3);
+		r[0] = Math.floor(Math.random() * 20);
+		while (r[0] == correctId) {
+			r[0] = Math.floor(Math.random() * 20);
+		}
+		r[1] = Math.floor(Math.random() * 20);
+		while (r[1] == r[0] || r[1] == correctId) {
+			r[1] = Math.floor(Math.random() * 20);
+		}
+		r[2] = Math.floor(Math.random() * 20);
+		while (r[2] == r[1] || r[2] == r[0] || r[2] == correctId) {
+			r[2] = Math.floor(Math.random() * 20);
+		}
+		return r;
 	}
 };
 
@@ -110,25 +161,33 @@ var game = {
 		q = elem.genQuestion(mode);
 		count = 0;
 		$('#score-bar').slideDown();
-		
-		// 给选项委托点击事件
-		$('#correct-option').on('click', function() {
-			game.correct();
-		});
-		$('.incorrect-options').on('click', function() {
-			game.incorrect();
-		});
+		$('#correct-bar').css('width', 0);
+		$('#incorrect-bar').css('width', 0);
+		$('#timeout-bar').css('width', 0);
 		
 		// generate question content
-		$('#timer-bar').show();
+		$('#game-area').show();
+		$('#game-desc').hide();
 		
 		game.next();
 	},
 	next: function() {
 		if (count < 20) {
-			// hide question {count - 1}
-			// dislay question {count}
-			timer.start();
+			$('#question-text').text(q[count][0]);
+			$('#game-area .option').removeClass('correct-option').removeClass('incorrect-option');
+			// 正确选项
+			var correctOption = Math.floor(Math.random() * 4);
+			$('#game-area .option').eq(correctOption).text(q[count][1]).addClass('correct-option');
+			// 干扰选项
+			var j = 2;
+			for (var i = 0; i < 4; i++) {
+				if (i != correctOption) {
+					$('#game-area .option').eq(i).text(q[count][j++]).addClass('incorrect-option');
+				}
+			}
+			
+			// 时间以毫秒为单位
+			timer.start(5000);
 			
 			count++;
 		} else {
@@ -138,21 +197,68 @@ var game = {
 	end: function() {
 		$('#correct-option').off('click');
 		$('.incorrect-options').off('click');
+		$(document).off('keydown');
+		
+		$('#game-area').hide();
+		$('#game-desc').show();
 	},
 	
 	correct: function() {
-		$('#correct-bar').animate({width: (++score[0] * 5) + '%'}, 500);
+		$('#correct-bar').animate({width: (++score[0] * 5) + '%'}, 200);
 		timer.break(true);
 		game.next();
 	},
 	incorrect: function() {
-		$('#incorrect-bar').animate({width: (++score[1] * 5) + '%'}, 500);
+		$('#incorrect-bar').animate({width: (++score[1] * 5) + '%'}, 200);
 		timer.break(false);
 		game.next();
 	},
 	timeout: function() {
-		$('#timeout-bar').animate({width: (++score[2] * 5) + '%'}, 500);
+		$('#timeout-bar').animate({width: (++score[2] * 5) + '%'}, 200);
 		game.next();
+	},
+	
+	listen: function() {
+		// 给选项委托点击事件
+		$(document).on('click', '.correct-option', function() {
+			game.correct();
+		});
+		$(document).on('click', '.incorrect-option', function() {
+			game.incorrect();
+		});
+		// 委托键盘事件
+		$(document).on('keydown', function(e) {
+			switch (e.keyCode) {
+				case 49:
+					// 1
+					break;
+				case 50:
+					// 2
+					break;
+				case 51:
+					// 3
+					break;
+				case 52:
+					// 4
+					break;
+					
+				case 97:
+					// num 1
+					break;
+				case 98:
+					// num 2
+					break;
+				case 99:
+					// num 3
+					break;
+				case 100:
+					// num 4
+					break;
+				
+				default:
+					// nothing to do
+			}
+		});
 	}
 };
 
@@ -160,18 +266,19 @@ var timerHandler;
 var timer = {
 	start: function(timeout) {
 		$('#time-bar').css('width', '100%');
-		timerHandler = setTimeout("game.timeout();", 3000);
-		$('#time-bar').animate({width: '0%'}, 3000, 'linear', function() {
+		timerHandler = setTimeout("game.timeout();", timeout);
+		$('#time-bar').animate({width: '0%'}, timeout, 'linear', function() {
 			$('#time-bar').css('width', '100%');
 		});
 	},
-	break: function(correct) {
+	break: function() {
 		clearTimeout(timerHandler);
 		$('#time-bar').stop().css('width', '100%');
 	}
 };
 
 jQuery(document).ready(function($) {
+	game.listen()
 	$('#mode1').click(function() {
 		game.start(0);
 	})

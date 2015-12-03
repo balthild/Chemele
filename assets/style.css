@@ -31,3 +31,5 @@ body {
     transition: none;
 }
 #timer-bar { margin-bottom: 0; }
+
+#question-text, .option { margin-bottom: 30px; outline: 0; }

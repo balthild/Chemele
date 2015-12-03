@@ -42,7 +42,7 @@
 
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="javascript:void();">单人竞速</a></li>
+				<li class="active"><a href="javascript:void(0)">单人竞速</a></li>
 				<li><a href="race.html">双人竞速</a></li>
 				<li><a href="preempt.html">双人抢答</a></li>
 			</ul>
@@ -61,7 +61,7 @@
 		<div class="col-md-3">
 			<div class="bs-sidebar hidden-print visible-lg visible-md" role="complementary" >
 				<ul class="nav bs-sidenav">
-						<li class="active"><a href="javascript:void();">单人竞速</a></li>
+						<li class="active"><a href="javascript:void(0)">单人竞速</a></li>
 						<li><a href="race.html">双人竞速</a></li>
 						<li><a href="preempt.html">双人抢答</a></li>
 				</ul>
@@ -75,7 +75,7 @@
 				<div class="progress-bar progress-bar-warning progress-bar-striped" id="timeout-bar" style="width: 0%"></div>
 			</div>
 			
-			<div class="panel panel-default">
+			<div class="panel panel-default" id="game-desc">
 				<div class="panel-body text-center">
 					<h3 class="control-title">单人竞速</h3>
 					<h4>难度说明：</h4>
@@ -85,15 +85,38 @@
 					<p>吊打：整张元素周期表</p>
 					<a class="btn btn-success" id="mode1" href="javascript:void(0)">简单</a>
 					<a class="btn btn-info" id="mode2" href="javascript:void(0)">一般</a>
-					<a class="btn btn-warning" id="mode3" href="#javascript:void(0)">困难</a>
+					<a class="btn btn-warning" id="mode3" href="javascript:void(0)">困难</a>
 					<a class="btn btn-danger" id="mode4" href="javascript:void(0)">吊打</a>
 				</div>
 			</div>
 			
-			<div class="panel panel-default">
-				<div class="panel-body text-center" id="game-area">
+			<div class="panel panel-default" id="game-area" style="display:none">
+				<div class="panel-body text-center">
 					
-					<div class="progress" id="timer-bar" style="display:none">
+					<div class="row">
+						<div class="col-md-12">
+							<h4 id="question-text">题目</h4>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-6 col-xs-12">
+							<button type="button" class="btn btn-primary btn-lg btn-block option">A选项</button>
+						</div>
+						<div class="col-sm-6 col-xs-12">
+							<button type="button" class="btn btn-primary btn-lg btn-block option">B选项</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6 col-xs-12">
+							<button type="button" class="btn btn-primary btn-lg btn-block option">C选项</button>
+						</div>
+						<div class="col-sm-6 col-xs-12">
+							<button type="button" class="btn btn-primary btn-lg btn-block option">D选项</button>
+						</div>
+					</div>
+					
+					<div class="progress" id="timer-bar">
 						<div class="progress-bar progress-bar-info progress-bar-striped" id="time-bar" style="width: 0%;"></div>
 					</div>
 				</div>
