@@ -114,12 +114,12 @@ var elem = {
 					break;
 				
 				case 5:
-					var r = elem.genIncorrectElementId(i);
 					// 生成随机位置id，见pos
 					var posId = Math.floor(Math.random() * 4);
 					while (qElem[i]["rel"][posId] == 0) {
 						posId = Math.floor(Math.random() * 4);
 					}
+					var r = elem.genIncorrectElementId(qElem[i]["rel"][posId] - 1);
 					questions[i] = [
 						templates[5][0].replace("{{sym}}", qElem[i]["sym"]).replace("{{pos}}", pos[posId]),
 						elements[qElem[i]["rel"][posId] - 1]["cn"],
