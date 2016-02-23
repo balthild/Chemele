@@ -37,5 +37,5 @@ body {
 	margin-bottom: 0;
 }
 #question-text, .option {
-	argin-bottom: 30px; outline: 0;
+	margin-bottom: 20px; outline: 0;
 }
