@@ -72,6 +72,9 @@ body {
 #question-text {
 	margin-bottom: 20px;
 }
+.keyword {
+	color: #E00;
+}
 #options-area {
 	margin-bottom: 15px;
 }

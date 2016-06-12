@@ -123,10 +123,10 @@ var elem = {
 					var r = elem.genIncorrectElementId(i);
 					questions[i] = [
 						templates[3][0].replace("{{sym}}", qElem[i]["sym"]),
-						groups[qElem[i]["gid"]] + "族" + qElem[i]["pr"] + "周期",
-						groups[qElem[r[0]]["gid"]] + "族" + qElem[r[2]]["pr"] + "周期",
-						groups[qElem[r[1]]["gid"]] + "族" + qElem[r[1]]["pr"] + "周期",
-						groups[qElem[r[2]]["gid"]] + "族" + qElem[r[0]]["pr"] + "周期"
+						qElem[i]["pr"] + " 周期 " + groups[qElem[i]["gid"]] + " 族",
+						qElem[r[2]]["pr"] + " 周期 " + groups[qElem[r[0]]["gid"]] + " 族",
+						qElem[r[1]]["pr"] + " 周期 " + groups[qElem[r[1]]["gid"]] + " 族",
+						qElem[r[0]]["pr"] + " 周期 " + groups[qElem[r[2]]["gid"]] + " 族"
 					];
 					break;
 				
@@ -193,7 +193,7 @@ var game = {
 	},
 	next: function() {
 		if (count < 20) {
-			$('#question-text').text(q[count][0]);
+			$('#question-text').html(q[count][0]);
 			$('#game-area .option').removeClass('correct-option').removeClass('incorrect-option');
 			// 正确选项
 			var correctOption = Math.floor(Math.random() * 4);
