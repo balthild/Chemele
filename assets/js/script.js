@@ -158,7 +158,7 @@ var elem = {
 	}
 };
 
-var score, q, count;
+var score, q, count, time;
 var game = {
 	start: function(mode) {
 		score = [0, 0, 0];
@@ -190,8 +190,7 @@ var game = {
 				}
 			}
 			
-			// 时间以毫秒为单位
-			timer.start(5000);
+			timer.start(time);
 			
 			count++;
 		} else {
@@ -282,8 +281,39 @@ var timer = {
 };
 
 jQuery(document).ready(function($) {
-	game.listen()
-	$('.start-game').click(function() {
-		game.start(parseInt($(this).attr('data-mode')));
+	game.listen();
+
+	$('.mode').click(function() {
+		$('.current-mode').removeClass('current-mode');
+		$(this).addClass('current-mode');
+		$('#mode').val($(this).attr('data-mode'));
+	})
+
+	var slider = document.getElementById('time-slider');
+	noUiSlider.create(slider, {
+		start: 5,
+		step: 1,
+		range: {
+			'min': 1,
+			'max': 15
+		},
+		format: {
+			to: function (value) {
+				return Math.floor(value);
+			},
+			from: function (value) {
+				return Math.floor(value);
+			}
+		}
+	});
+	slider.noUiSlider.on('update', function(values, handle) {
+		$('#time-value').val(values[handle]);
+		$('#time-value-show').text(values[handle]);
+	});
+
+	$('#start-game').click(function() {
+		// 时间转换为毫秒数
+		time = parseInt($('#time-value').val()) * 1000;
+		game.start(parseInt($('#mode').val()));
 	})
 });

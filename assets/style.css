@@ -1,10 +1,9 @@
 body {
-    font-family: 'Microsoft Yahei', sans-serif;
-    background: #eee;
+	font-family: 'Microsoft Yahei', sans-serif;
+	background: #eee;
 }
-
 .bs-sidenav li {
-    padding-left: 2px;
+	padding-left: 2px;
 	margin-left: 0;
 }
 .bs-sidenav .active {
@@ -18,17 +17,15 @@ body {
 	color: #333;
 }
 .bs-sidenav li:hover a {
-    background-color: transparent;
+	background-color: transparent;
 }
-
 .control-title {
-    margin-top: 0;
+	margin-top: 0;
 }
-
 #score-bar .progress-bar, #timer-bar .progress-bar {
 	-webkit-transition: none;
-    -o-transition: none;
-    transition: none;
+	-o-transition: none;
+	transition: none;
 }
 .btn {
 	margin: 5px 0;
@@ -37,5 +34,43 @@ body {
 	margin-bottom: 0;
 }
 #question-text, .option {
-	margin-bottom: 20px; outline: 0;
+	margin-bottom: 20px;
+	outline: 0;
+}
+.mode {
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+.current-mode {
+	background: #EEE;
+}
+.elem-img {
+	width: 100%;
+	height: auto;
+}
+#time-slider {
+	margin: 20px auto;
+	padding: 0 6px;
+	border-radius: 0;
+	border: 0;
+	box-shadow: none;
+	background: #EEE;
+}
+#time-slider .noUi-handle {
+	border: 0;
+	box-shadow: none;
+	width: 12px;
+	height: 18px;
+	top: 0;
+	left: -6px;
+	border-radius: 0;
+	background: #5BC0DE;
+}
+#time-slider .noUi-handle:before, #time-slider .noUi-handle:after {
+	display: none;
+	width: 0;
+	height: 0;
+}
+#time-show {
+	line-height: 44px;
 }
