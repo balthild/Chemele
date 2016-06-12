@@ -23,44 +23,46 @@ var elem = {
 			default:
 				return false;
 		}
-		// $('#game-area').append('<br>' + JSON.stringify(picked));
+		// $('body').append(JSON.stringify(picked).replace(new RegExp(/({)/g), '<br>{'));
 
 		var randArr = elem.genRandArr(mode);
 		var disordered = new Array(20);
 		for (var i = 0; i < 20; i++) {
 			disordered[i] = picked[randArr[i]];
+			if (disordered[i] == null) {
+				alert(i)
+				alert(randArr[i])
+			}
 		}
-		// $('#game-area').append('<br>' + JSON.stringify(disordered));
+		// $('body').append(JSON.stringify(disordered).replace(new RegExp(/({)/g), '<br>{'));
 		return disordered;
 	},
 	
 	genRandArr: function(mode) {
-		// 这是网上抄来的打乱数组的代码，原理我也不知道 quq
-		var arr = [];
+		var i, arr = [];
 		switch (mode) {
 			case 0:
-				var i = 20;
-				while(i) arr.push(--i);
+				i = 20;
 				break;
 			case 1:
-				var i = 36;
-				while(i) arr.push(--i);
+				i = 36;
 				break;
 			case 2:
-				arr = [0, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 18, 19, 30, 31, 32, 33, 34, 36, 37, 48, 49, 50, 51, 52, 54, 55, 80, 81, 82, 83, 84, 86, 87];
+				i = 38;
 				break;
 			case 3:
-				var i = 112;
-				while(i) arr.push(--i);
+				i = 112;
 				break;
 				
 			default:
 				return false;
 		}
+		while(i) arr.push(--i);
 		var randArr = [];
+		// 下面是网上抄来的打乱数组的代码，原理我也不知道 quq
 		while (arr.length > 0) {
 			var elem = arr.splice(Math.random() * arr.length << 0, 1);
-			randArr.push(elem);
+			randArr.push(elem[0]);
 		}
 		return randArr;
 	},
@@ -164,17 +166,10 @@ var elem = {
 	},
 	genIncorrectElementId: function(correctId) {
 		var r = new Array(3);
-		r[0] = Math.floor(Math.random() * 20);
-		while (r[0] == correctId) {
-			r[0] = Math.floor(Math.random() * 20);
-		}
-		r[1] = Math.floor(Math.random() * 20);
-		while (r[1] == r[0] || r[1] == correctId) {
-			r[1] = Math.floor(Math.random() * 20);
-		}
-		r[2] = Math.floor(Math.random() * 20);
-		while (r[2] == r[1] || r[2] == r[0] || r[2] == correctId) {
-			r[2] = Math.floor(Math.random() * 20);
+		for (var i = 0; i < 3; i++) {
+			do {
+				r[i] = Math.floor(Math.random() * 20);
+			} while (r[0] == correctId);
 		}
 		return r;
 	}
