@@ -23,24 +23,46 @@ var elem = {
 			default:
 				return false;
 		}
+		// $('#game-area').append('<br>' + JSON.stringify(picked));
 
-		var randArr = elem.genRandArr();
+		var randArr = elem.genRandArr(mode);
 		var disordered = new Array(20);
 		for (var i = 0; i < 20; i++) {
 			disordered[i] = picked[randArr[i]];
 		}
+		// $('#game-area').append('<br>' + JSON.stringify(disordered));
 		return disordered;
 	},
 	
-	genRandArr: function() {
+	genRandArr: function(mode) {
 		// 这是网上抄来的打乱数组的代码，原理我也不知道 quq
-		var arr1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
-		var arr2 = [];
-		while (arr1.length > 0) {
-			var elem = arr1.splice(Math.random() * arr1.length << 0, 1);
-			arr2.push(elem);
+		var arr = [];
+		switch (mode) {
+			case 0:
+				var i = 20;
+				while(i) arr.push(--i);
+				break;
+			case 1:
+				var i = 36;
+				while(i) arr.push(--i);
+				break;
+			case 2:
+				arr = [0, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 18, 19, 30, 31, 32, 33, 34, 36, 37, 48, 49, 50, 51, 52, 54, 55, 80, 81, 82, 83, 84, 86, 87];
+				break;
+			case 3:
+				var i = 112;
+				while(i) arr.push(--i);
+				break;
+				
+			default:
+				return false;
 		}
-		return arr2;
+		var randArr = [];
+		while (arr.length > 0) {
+			var elem = arr.splice(Math.random() * arr.length << 0, 1);
+			randArr.push(elem);
+		}
+		return randArr;
 	},
 	
 	genQuestion: function(mode) {
@@ -169,7 +191,6 @@ var game = {
 		$('#incorrect-bar').css('width', 0);
 		$('#timeout-bar').css('width', 0);
 		
-		// generate question content
 		$('#game-area').show();
 		$('#game-desc').hide();
 		
