@@ -1,6 +1,6 @@
 var elem = {
 	pick: function(mode) {
-		var picked = new Array(20);
+		var picked = [];
 		switch (mode) {
 			// 简单0，一般1，困难2，吊打3
 			case 0:
@@ -10,7 +10,11 @@ var elem = {
 				picked = elements.slice(0, 36);
 				break;
 			case 2:
-				picked = elements;
+				for (var i = 0; i < elements.length; i++) {
+					if (elements[i]["gid"] == 1 || elements[i]["gid"] == 2 || (elements[i]["gid"] >= 13 && elements[i]["gid"] <= 17)) {
+						picked.push(elements[i]);
+					}
+				}
 				break;
 			case 3:
 				picked = elements;
@@ -279,7 +283,7 @@ var timer = {
 
 jQuery(document).ready(function($) {
 	game.listen()
-	$('#mode1').click(function() {
-		game.start(0);
+	$('.start-game').click(function() {
+		game.start(parseInt($(this).attr('data-mode')));
 	})
 });
