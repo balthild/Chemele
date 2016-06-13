@@ -331,5 +331,12 @@ jQuery(document).ready(function($) {
 		// 时间转换为毫秒数
 		time = parseInt($('#time-value').val()) * 1000;
 		game.start(parseInt($('#mode').val()));
-	})
+	});
+
+	$(document).on('mouseenter touchstart', '.option', function() {
+		$(this).addClass('hover');
+	});
+	$(document).on('mouseleave touchend click', '.option', function() {
+		$(this).removeClass('hover');
+	});
 });

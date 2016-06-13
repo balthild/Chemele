@@ -86,12 +86,25 @@ body {
 	cursor: pointer;
 	font-size: 16px;
 }
-.option:hover {
-	background: #EEE;
+.option.hover {
+	background: #F5F5F5;
 }
 #option-c, #option-d {
 	border-bottom: 1px solid #EEE;
 }
 #option-a, #option-c {
 	border-right: 1px solid #EEE;
+}
+
+@media screen and (max-width: 375px) {
+	.option {
+		width: 100%;
+		float: none;
+	}
+	#option-c {
+		border-bottom: 0;
+	}
+	#option-a, #option-c {
+		border-right: 0;
+	}
 }
