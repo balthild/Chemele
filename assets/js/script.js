@@ -143,10 +143,9 @@ var elem = {
 				
 				case 5:
 					// 生成随机位置id，见pos
-					var posId = Math.floor(Math.random() * 4);
-					while (qElem[i]["rel"][posId] == 0) {
+					do {
 						posId = Math.floor(Math.random() * 4);
-					}
+					} while (qElem[i]["rel"][posId] == 0);
 					var r = elem.genIncorrectElementId(qElem[i]["rel"][posId] - 1);
 					questions[i] = [
 						templates[5][0].replace("{{sym}}", qElem[i]["sym"]).replace("{{pos}}", pos[posId]),
@@ -169,7 +168,7 @@ var elem = {
 		for (var i = 0; i < 3; i++) {
 			do {
 				r[i] = Math.floor(Math.random() * 20);
-			} while (r[0] == correctId);
+			} while (r[i] == correctId || (jQuery.inArray(r[i], r) > -1 && jQuery.inArray(r[i], r) != i));
 		}
 		return r;
 	}
